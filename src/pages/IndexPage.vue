@@ -3,6 +3,7 @@
     <div class="row">
       <q-btn label="shuffle" @click="shuffleDeck" />
       <q-btn label="draw" @click="drawToHand(1)" />
+      <q-btn label="discard selected" @click="discardSelected" />
     </div>
     <div class="row">
       <div class="col-6">
@@ -18,7 +19,7 @@
           />
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-3">
         <p>deck: ({{ deck.length }} cards)</p>
         <div class="row q-gutter-sm">
           <!-- <PlayingCard v-for="card in deck" :key="card.id" :card="card" /> -->
@@ -28,6 +29,10 @@
             @click="drawToHand(1)"
           />
         </div>
+      </div>
+      <div class="col-3">
+        <p>discard: ({{ discardPile.length }} cards)</p>
+        <CardSlot :cards="discardPile" name="Discard Pile" />
       </div>
     </div>
   </q-page>
@@ -42,13 +47,15 @@ import { Card } from 'src/cards/types';
 import { useDeckStore } from 'src/stores/deck';
 
 import PlayingCard from 'src/components/PlayingCard.vue';
+import CardSlot from 'src/components/CardSlot.vue';
 
 export default defineComponent({
   name: 'IndexPage',
-  components: { PlayingCard },
+  components: { PlayingCard, CardSlot },
   data() {
     return {
       hand: [] as Card[],
+      discardPile: [] as Card[],
     };
   },
   computed: {
@@ -72,6 +79,15 @@ export default defineComponent({
       this.draw(count).forEach((card: Card) => {
         this.hand.push({ ...card, faceDown: false });
       });
+    },
+    discardSelected() {
+      this.hand.forEach((card: Card) => {
+        if (card.selected) {
+          this.discardPile.push({ ...card, selected: false });
+        }
+      });
+
+      this.hand = this.hand.filter((card: Card) => !card.selected);
     },
   },
   mounted() {

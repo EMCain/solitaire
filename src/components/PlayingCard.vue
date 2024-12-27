@@ -44,6 +44,7 @@ export default {
   height: 8rem;
   width: 5rem;
   padding: 2rem;
+  background-color: white;
 
   &__selected {
     border: 3px solid lightgreen;
