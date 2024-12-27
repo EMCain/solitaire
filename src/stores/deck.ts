@@ -5,21 +5,20 @@ import { buildDeck, shuffle } from 'src/cards/functions';
 
 export const useDeckStore = defineStore('deck', {
   state: () => ({
-    deck: [] as Card[]
+    deck: [] as Card[],
   }),
   actions: {
     printDeck() {
-        console.log('deck', this.deck)
-        
+      console.log('deck', this.deck);
     },
     createDeck() {
-      this.deck = buildDeck()
+      this.deck = buildDeck();
     },
-    shuffleDeck () {
-        this.deck = shuffle(this.deck)
+    shuffleDeck() {
+      this.deck = shuffle(this.deck);
     },
-    draw (num = 1) {
-        return this.deck.splice(0-num, num)
-    }
+    draw(num = 1): Card[] {
+      return this.deck.splice(0 - num, num);
+    },
   },
 });
