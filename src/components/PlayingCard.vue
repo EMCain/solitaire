@@ -28,10 +28,14 @@ export default {
 </script>
 
 <template>
-  <div :class="cardClass">
-    <span v-if="card.faceDown" class="circle-icon"></span>
-    <span v-else>
-      {{ card.rank.name }}
+  <div :class="cardClass" v-if="card.faceDown" />
+  <div :class="cardClass" v-else>
+    <span>
+      {{ card.rank.shortName }}
+      {{ card.suit.emoji }}
+    </span>
+    <span class="bottom-right">
+      {{ card.rank.shortName }}
       {{ card.suit.emoji }}
     </span>
   </div>
@@ -43,8 +47,11 @@ export default {
   border-radius: 5px;
   height: 8rem;
   width: 5rem;
-  padding: 2rem;
+  padding: 2px;
   background-color: white;
+
+  display: flex;
+  justify-content: space-between;
 
   &__selected {
     border: 3px solid lightgreen;
@@ -59,17 +66,14 @@ export default {
   }
 
   &__face-down {
-    background-color: blue;
-    color: white;
+    background-image: url('assets/image/Mosaico_nazarí_(hueso).svg');
+    background-size: 200%;
+  }
 
-    .circle-icon {
-      width: 1rem;
-      height: 1rem;
-      margin: 1rem 0;
-      border-radius: 100%;
-      background-color: white;
-      display: block;
-    }
+  .bottom-right {
+    justify-self: end;
+    align-self: end;
+    transform: rotate(180deg);
   }
 }
 </style>

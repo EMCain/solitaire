@@ -11,6 +11,7 @@ export type CardName = 'ace' | 'jack' | 'queen' | 'king';
 export interface Rank {
   value: number;
   name: number | CardName;
+  shortName: string;
 }
 
 // this doesn't support Jokers yet

@@ -1,4 +1,4 @@
-import { Rank, Suit } from './types';
+import { CardName, Rank, Suit } from './types';
 
 export const SUITS: Suit[] = [
   {
@@ -80,4 +80,8 @@ export const RANKS: Rank[] = [
     value: 13,
     name: 'king',
   },
-];
+].map(({ name, value }) => ({
+  name: name as CardName,
+  value,
+  shortName: `${name}`[0],
+}));
