@@ -59,6 +59,9 @@ export default {
   padding: 2px;
 
   // stacking card effect; adapted from Stacked Cards Smooth Show on Hover by Zed Dash https://codepen.io/z-/full/eYPLWWL
+
+  // TODO move these variables into a scss file shared with the Card component (or just consolidate all the CSS)
+  // and make the "size" variables the same ones used to determine actual card size.
   --card-shown-x: 0rem;
   --card-shown-y: 1.5rem;
   --card-size-x: 12rem;
