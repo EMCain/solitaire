@@ -70,6 +70,7 @@ export default {
   &__face-down {
     background-image: url('assets/image/Mosaico_nazarí_(hueso).svg');
     background-size: 200%;
+    background-position: -5px;
   }
 
   .bottom-right {
