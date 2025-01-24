@@ -57,5 +57,31 @@ export default {
   border: 2px solid darkslategray;
   background-color: lightslategray;
   padding: 2px;
+
+  // stacking card effect; adapted from Stacked Cards Smooth Show on Hover by Zed Dash https://codepen.io/z-/full/eYPLWWL
+  --card-shown-x: 0rem;
+  --card-shown-y: 1.5rem;
+  --card-size-x: 12rem;
+  --card-size-y: 8rem;
+  --card-padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-right: calc(
+    var(--card-size-x) - var(--card-shown-x) + 2 * var(--card-padding)
+  );
+  padding-bottom: calc(
+    var(--card-size-y) - var(--card-shown-y) + 2 * var(--card-padding)
+  );
+  .card-container {
+    position: relative;
+    margin-left: calc((var(--num) - 1) * var(--card-shown-x));
+    width: var(--card-shown-x);
+    height: var(--card-shown-y);
+
+    .playing-card {
+      position: absolute;
+      gap: 0.5rem;
+    }
+  }
 }
 </style>

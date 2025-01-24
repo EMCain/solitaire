@@ -28,16 +28,18 @@ export default {
 </script>
 
 <template>
-  <div :class="cardClass" v-if="card.faceDown" />
-  <div :class="cardClass" v-else>
-    <span>
-      {{ card.rank.shortName }}
-      {{ card.suit.emoji }}
-    </span>
-    <span class="bottom-right">
-      {{ card.rank.shortName }}
-      {{ card.suit.emoji }}
-    </span>
+  <div class="card-container">
+    <div :class="cardClass" v-if="card.faceDown" />
+    <div :class="cardClass" v-else>
+      <span>
+        {{ card.rank.shortName }}
+        {{ card.suit.emoji }}
+      </span>
+      <span class="bottom-right">
+        {{ card.rank.shortName }}
+        {{ card.suit.emoji }}
+      </span>
+    </div>
   </div>
 </template>
 

@@ -83,5 +83,5 @@ export const RANKS: Rank[] = [
 ].map(({ name, value }) => ({
   name: name as CardName,
   value,
-  shortName: `${name}`[0],
+  shortName: typeof name === 'string' ? name[0] : `${name}`,
 }));
