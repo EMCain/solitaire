@@ -26,6 +26,13 @@ export const usePinochleStore = defineStore('pinochleDeck', {
       if (state.currentPlayerNumber === 4) return state.player4;
       throw new Error('no player selected');
     },
+    teammate(state): Player {
+      if (state.currentPlayerNumber === 1) return state.player3;
+      if (state.currentPlayerNumber === 2) return state.player4;
+      if (state.currentPlayerNumber === 3) return state.player1;
+      if (state.currentPlayerNumber === 4) return state.player2;
+      throw new Error('no player selected');
+    },
   },
   actions: {
     createDeck() {
@@ -44,6 +51,16 @@ export const usePinochleStore = defineStore('pinochleDeck', {
     },
     draw(num = 1): Card[] {
       return this.deck.splice(0 - num, num);
+    },
+    giveSelectionToTeammate() {
+      this.teammate.hand.push(
+        ...this.currentPlayer.hand
+          .filter((c: Card) => c.selected)
+          .map((c: Card) => ({ ...c, selected: false }))
+      );
+      this.currentPlayer.hand = this.currentPlayer.hand.filter(
+        (c: Card) => !c.selected
+      );
     },
   },
 });

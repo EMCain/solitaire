@@ -26,7 +26,11 @@ export default defineComponent({
     ...mapWritableState(usePinochleStore, ['currentPlayerNumber']),
   },
   methods: {
-    ...mapActions(usePinochleStore, ['createDeck', 'deal']),
+    ...mapActions(usePinochleStore, [
+      'createDeck',
+      'deal',
+      'giveSelectionToTeammate',
+    ]),
   },
   mounted() {
     this.createDeck();
@@ -44,12 +48,19 @@ export default defineComponent({
         :options="[1, 2, 3, 4]"
       />
     </div>
+    <div class="row">{{ currentPlayer.hand.length }} cards</div>
     <div class="row q-gutter-sm">
       <PlayingCard
         v-for="card in currentPlayer.hand"
         :key="card.id"
         :card="card"
         @click="card.selected = !card.selected"
+      />
+    </div>
+    <div class="row q-gutter-sm">
+      <q-btn
+        label="give selected to teammate"
+        @click="giveSelectionToTeammate"
       />
     </div>
   </div>
