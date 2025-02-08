@@ -23,9 +23,9 @@
         <p>deck: ({{ deck.length }} cards)</p>
         <div class="row q-gutter-sm">
           <!-- <PlayingCard v-for="card in deck" :key="card.id" :card="card" /> -->
-          <PlayingCard
-            v-if="topOfDeck"
-            :card="topOfDeck"
+          <CardStack
+            :cards="deck.slice(-10, -1)"
+            card-shown-y="3px"
             @click="drawToHand(1)"
           />
         </div>
@@ -48,12 +48,14 @@ import { useDeckStore } from 'src/stores/deck';
 
 import PlayingCard from 'src/components/PlayingCard.vue';
 import CardSlot from 'src/components/CardSlot.vue';
+import CardStack from 'src/components/CardStack.vue';
 
 export default defineComponent({
   name: 'IndexPage',
-  components: { PlayingCard, CardSlot },
+  components: { PlayingCard, CardSlot, CardStack },
   data() {
     return {
+      HAND_LIMIT: 7,
       hand: [] as Card[],
       discardPile: [] as Card[],
     };
@@ -77,7 +79,10 @@ export default defineComponent({
     ]),
     drawToHand(count: number) {
       this.draw(count).forEach((card: Card) => {
-        this.hand.push({ ...card, faceDown: false });
+        // TODO: stop looping if not necessary
+        if (this.hand.length < this.HAND_LIMIT) {
+          this.hand.push({ ...card, faceDown: false });
+        }
       });
     },
     discardSelected() {
